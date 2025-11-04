@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rekkot</title>
+  <meta name="description" content="Rekkot — Emprendimiento de pasteles y postres de temporada. Objetivo, planeación, estructura, diseño, contenido y publicación del sitio." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* Paleta clara tomada del logo */
+      --crema:#fff7ee;
+      --crema-2:#fff1e1;
+      --blanco:#ffffff;
+      --texto:#4a2f23;        /* café suave */
+      --marron:#9b5a3c;       /* caramelo p/botones/títulos */
+      --naranja:#d7793c;      /* acento */
+      --verde:#8fb573;        /* hojas */
+      --borde:#ead8c7;
+      --sombra:0 12px 26px rgba(154,93,60,.14);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;padding:0; color:var(--texto);
+      background:
+        radial-gradient(800px 360px at 90% -10%, #ffe9d1 0%, rgba(255,233,209,0) 55%),
+        linear-gradient(180deg, var(--crema) 0%, var(--crema-2) 100%);
+      font-family:Nunito, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif
+    }
+    img{max-width:100%; display:block}
+    a{color:var(--naranja); text-decoration:none}
+
+    /* Header */
+    header{background:#fff; border-bottom:1px solid var(--borde)}
+    .nav{max-width:1200px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:16px 20px}
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand img{width:48px; height:48px; object-fit:cover; border-radius:50%; box-shadow:0 6px 14px rgba(100,60,30,.10)}
+    .brand h1{font-family:"Playfair Display", serif; font-weight:700; letter-spacing:.5px; margin:0; color:var(--marron)}
+    .btn{display:inline-block; padding:12px 18px; border-radius:14px; font-weight:800; border:1px solid #e9d6c4; background:linear-gradient(90deg, var(--naranja), var(--verde)); color:#fff; box-shadow:var(--sombra)}
+    .btn.secondary{background:linear-gradient(90deg, var(--verde), #6f8e53)}
+
+    /* Hero */
+    .hero{max-width:1200px; margin:auto; display:grid; grid-template-columns:1.15fr .85fr; gap:32px; padding:28px 20px 48px}
+    .hero h2{font-family:"Playfair Display", serif; font-size:clamp(28px,3.2vw,46px); line-height:1.05; margin:8px 0 12px; color:var(--marron)}
+    .hero p{font-size:1.05rem}
+    .badge{display:inline-flex; gap:8px; font-size:.9rem; padding:6px 10px; border-radius:999px; background:#fff; border:1px solid var(--borde); color:var(--naranja); font-weight:800}
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+    .chip{padding:8px 12px; border-radius:999px; background:#fff; border:1px solid var(--borde); color:var(--marron); font-weight:700}
+    .hero-visual{position:relative; border-radius:20px; overflow:hidden; border:1px solid var(--borde); box-shadow:var(--sombra)}
+    .hero-visual::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,247,238,0), rgba(255,247,238,.45))}
+
+    /* Secciones */
+    .section{max-width:1200px; margin:56px auto; padding:0 20px}
+    .section h3{font-family:"Playfair Display", serif; font-size:clamp(22px,2.1vw,32px); color:var(--marron); margin:0 0 8px}
+    .sub{color:#6f4a3a; margin:0 0 18px}
+    .grid{display:grid; gap:18px}
+    .cards{grid-template-columns:repeat(3,1fr)}
+    .two{grid-template-columns:1fr 1fr}
+    .card{background:#fff; border:1px solid var(--borde); border-radius:var(--radius); padding:20px; box-shadow:var(--sombra)}
+    .card h4{margin:0 0 8px; color:var(--marron)}
+    .list-check{list-style:none; padding:0; margin:0}
+    .list-check li{margin:10px 0; padding-left:28px; position:relative}
+    .list-check li::before{content:"🍰"; position:absolute; left:0; top:0}
+    .sitemap{display:grid; gap:12px}
+    .node{background:#fff; border:2px dashed #eccfb9; padding:14px; border-radius:12px}
+    .node strong{color:var(--marron)}
+
+    /* Galería */
+    .gallery{display:grid; grid-template-columns:repeat(5, 1fr); gap:12px}
+    .gallery figure{margin:0; background:#fff; border:1px solid var(--borde); border-radius:14px; overflow:hidden; box-shadow:0 10px 18px rgba(180,120,80,.10)}
+    .gallery figcaption{padding:10px 12px; font-weight:700; color:#7a5c4c; font-size:.95rem; background:#fff}
+
+    footer{margin:72px 0 20px; text-align:center; color:#7a5c4c}
+
+    /* Responsive */
+    @media (max-width: 1024px){ .gallery{grid-template-columns:repeat(3,1fr)} }
+    @media (max-width: 720px){ .hero{grid-template-columns:1fr} .cards{grid-template-columns:1fr} .two{grid-template-columns:1fr} .gallery{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width: 420px){ .gallery{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <!-- ===== HEADER / HERO ===== -->
+  <header>
+    <nav class="nav">
+      <div class="brand">
+        <img src="img/logo.png" alt="Logo Rekkot Repostería" onerror="this.style.display='none'">
+        <h1>Rekkot</h1>
+      </div>
+      <a class="btn" href="#publicacion">Publicación</a>
+    </nav>
+
+    <div class="hero">
+      <div>
+        <span class="badge">Repostería de temporada</span>
+        <h2>Pasteles y postres artesanales para cada estación</h2>
+        <p>
+          En <strong>Rekkot</strong> horneamos colecciones por temporada: primavera (frutos rojos),
+          verano (cítricos), otoño (calabaza y especias) e invierno (chocolate y avellana).
+          Aquí verás el objetivo, planeación, estructura, diseño/herramientas, contenido y publicación del sitio.
+        </p>
+        <div class="chips">
+          <span class="chip">Hecho a mano</span>
+          <span class="chip">Ingredientes locales</span>
+          <span class="chip">Pedidos por encargo</span>
+          <span class="chip">Ediciones limitadas</span>
+        </div>
+        <div class="chips" style="margin-top:14px">
+          <a class="btn" href="#galeria">Ver galería</a>
+          <a class="btn secondary" href="#estructura">Estructura</a>
+        </div>
+      </div>
+      <figure class="hero-visual">
+        <!-- Foto real como hero -->
+        <img src="img/real-2.jpg" alt="Cajas de pan dulce Rekkot con toppings" loading="eager">
+      </figure>
+    </div>
+  </header>
+
+  <!-- ===== OBJETIVO ===== -->
+  <section id="objetivo" class="section">
+    <h3>Objetivo del sitio web</h3>
+    <p class="sub">Lo que queremos lograr con nuestra presencia en línea.</p>
+
+    <div class="grid cards">
+      <article class="card">
+        <h4>Atraer y antojar</h4>
+        <p>Mostrar colecciones de temporada con fotos reales y descripciones breves.</p>
+      </article>
+      <article class="card">
+        <h4>Simplificar pedidos</h4>
+        <p>Guiar al cliente para elegir sabor, tamaño y fecha de entrega en pocos clics.</p>
+      </article>
+      <article class="card">
+        <h4>Fidelizar</h4>
+        <p>Calendario estacional, promos y novedades para que regresen cada estación.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== PLANEACIÓN ===== -->
+  <section id="planeacion" class="section">
+    <h3>Planeación</h3>
+    <p class="sub">Ruta para lanzar y mejorar el sitio de Rekkot.</p>
+
+    <div class="grid two">
+      <div class="card">
+        <h4>Línea de tiempo</h4>
+        <ul class="list-check">
+          <li><strong>Semana 1:</strong> branding, paleta (colores del logo) e inventario por temporada.</li>
+          <li><strong>Semana 2:</strong> prototipo (wireframes y mockups de portada, menú y pedidos).</li>
+          <li><strong>Semana 3:</strong> desarrollo (HTML/CSS/JS) y optimización de imágenes.</li>
+          <li><strong>Semana 4:</strong> publicación (dominio, hosting, SEO local y Google Maps).</li>
+          <li><strong>Mensual:</strong> nueva colección + newsletter.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Entregables</h4>
+        <ul class="list-check">
+          <li>Guía de estilos (crema, caramelo y verde) y tipografías.</li>
+          <li>Prototipo navegable y textos de productos.</li>
+          <li>Sitio responsive con accesibilidad AA.</li>
+          <li>Checklist SEO + ficha de Google Business.</li>
+          <li>Plan de fotos por temporada.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ESTRUCTURA DEL SITIO ===== -->
+  <section id="estructura" class="section">
+    <h3>Estructura del sitio</h3>
+    <p class="sub">Arquitectura de información enfocada en pedidos estacionales.</p>
+
+    <div class="grid two">
+      <div class="card">
+        <h4>Mapa (Sitemap)</h4>
+        <div class="sitemap">
+          <div class="node"><strong>Inicio</strong> — Colección vigente y CTA “Hacer pedido”.</div>
+          <div class="node"><strong>Menú por temporada</strong> — Primavera, Verano, Otoño, Invierno.</div>
+          <div class="node"><strong>Catálogo</strong> — Pasteles, pays, cupcakes, macarons, galletas.</div>
+          <div class="node"><strong>Sobre Rekkot</strong> — Historia, proceso artesanal y equipo.</div>
+          <div class="node"><strong>Pedidos</strong> — Formulario/WhatsApp, horarios y entregas.</div>
+          <div class="node"><strong>Blog</strong> — Recetas y tips de temporada (opcional).</div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>UX & Navegación</h4>
+        <ul class="list-check">
+          <li>Menú fijo simple (máx. 6 opciones) y CTA visibles.</li>
+          <li>Fotos grandes + precios claros.</li>
+          <li>Mobile-first y tiempos de carga bajos (imágenes comprimidas).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DISEÑO / HERRAMIENTAS ===== -->
+  <section id="diseno" class="section">
+    <h3>Diseño y la herramienta</h3>
+    <p class="sub">Herramientas coherentes con la identidad de Rekkot.</p>
+
+    <div class="grid cards">
+      <article class="card">
+        <h4>Canva</h4>
+        <p>Banners y flyers de colecciones usando los colores del logo.</p>
+      </article>
+      <article class="card">
+        <h4>Wix / Google Sites</h4>
+        <p>Versión sin código para catálogo y botón de pedido rápido.</p>
+      </article>
+      <article class="card">
+        <h4>HTML/CSS/JS</h4>
+        <p>Control total del diseño y rendimiento (esta versión).</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== CONTENIDO: GALERÍA REAL ===== -->
+  <section id="galeria" class="section">
+    <h3>Galería real de Rekkot</h3>
+    <p class="sub">Pasteles y postres de temporada (fotos reales de tu emprendimiento).</p>
+
+    <div class="gallery">
+      <figure>
+        <img src="img/real-1.jpg" alt="Bites azucarados con dips de chocolate y fresa" loading="lazy">
+        <figcaption>Bites con dips</figcaption>
+      </figure>
+      <figure>
+        <img src="img/real-2.jpg" alt="Cajas individuales con pan dulce y toppings" loading="lazy">
+        <figcaption>Ediciones con topping</figcaption>
+      </figure>
+      <figure>
+        <img src="img/real-3.jpg" alt="Pastel de guayaba con betún blanco" loading="lazy">
+        <figcaption>Pastel de guayaba</figcaption>
+      </figure>
+      <figure>
+        <img src="img/real-4.jpg" alt="Tarta de frutos rojos espolvoreada con azúcar glass" loading="lazy">
+        <figcaption>Tarta frutos rojos</figcaption>
+      </figure>
+      <figure>
+        <img src="img/real-5.jpg" alt="Pastel mil crepas decorado con conejitos de chocolate" loading="lazy">
+        <figcaption>Mil crepas</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== PUBLICACIÓN Y PRESENTACIÓN ===== -->
+  <section id="publicacion" class="section">
+    <h3>La publicación y la presentación</h3>
+    <p class="sub">Checklist para salir a producción y exponer el proyecto.</p>
+
+    <div class="grid two">
+      <div class="card">
+        <h4>Publicación</h4>
+        <ul class="list-check">
+          <li>Dominio (p. ej. <strong>rekkot.mx</strong>) y hosting con SSL.</li>
+          <li>SEO local: Google Business, horarios y mapa.</li>
+          <li>Imágenes WebP/JPG optimizadas + <em>alt</em> descriptivo.</li>
+          <li>Sitemap.xml y robots.txt para indexación.</li>
+          <li>Analítica (GA4) y eventos de clic en “Hacer pedido”.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Presentación</h4>
+        <ul class="list-check">
+          <li>Introducción: propuesta (postres de temporada) y público meta.</li>
+          <li>Recorrido: Inicio → Menú estacional → Pedidos.</li>
+          <li>Decisiones de diseño: paleta crema/caramelo/verde, tipografías.</li>
+          <li>Demostración responsive (móvil/desktop).</li>
+          <li>Roadmap: nueva colección cada estación + ediciones especiales.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACTO (DEMO) ===== -->
+  <section id="contacto" class="section">
+    <h3>Contacto</h3>
+    <p class="sub">Déjanos tus datos (formulario demostrativo, sin backend).</p>
+    <div class="card">
+      <form onsubmit="event.preventDefault(); alert('¡Gracias! Pronto te contactaremos para tu pedido.');">
+        <div class="grid two">
+          <label>Nombre<br><input required style="width:100%; padding:12px; border-radius:12px; border:1px solid var(--borde); background:#fff; color:var(--texto)"></label>
+          <label>WhatsApp / Email<br><input required style="width:100%; padding:12px; border-radius:12px; border:1px solid var(--borde); background:#fff; color:var(--texto)"></label>
+        </div>
+        <label style="display:block; margin-top:12px">Pedido / Mensaje<br>
+          <textarea rows="4" required style="width:100%; padding:12px; border-radius:12px; border:1px solid var(--borde); background:#fff; color:var(--texto)"></textarea>
+        </label>
+        <button class="btn" style="margin-top:12px">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <small>© <span id="y"></span> Rekkot Repostería — Hecho con ♥ y sabor de temporada</small>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
